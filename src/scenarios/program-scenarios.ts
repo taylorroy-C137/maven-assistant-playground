@@ -9,6 +9,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "First question a new user asks after landing on the GLP-1 program page. Tests onboarding explanation.",
@@ -41,6 +42,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "High-stakes confusion — member doesn't know if the subscription covers medication. Tests clear pricing communication.",
@@ -73,6 +75,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Commitment anxiety. Tests transparent cancellation policy communication.",
@@ -105,6 +108,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Critical path question for new members. Tests Rx workflow explanation including timing expectations.",
@@ -137,6 +141,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Very common question. Tests insurance navigation guidance — the answer is nuanced and depends on medication vs. program costs.",
@@ -169,6 +174,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests cross-program knowledge. Good opportunity to explain that the two programs are complementary — common upsell scenario.",
@@ -201,6 +207,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests provider booking flow and specialist availability. Member is frustrated with generalist care and wants someone with real menopause expertise.",
@@ -246,6 +253,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Urgency test — critical to get right for member safety. Tests care team messaging routing and response time expectations.",
@@ -286,6 +294,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests provider network knowledge. Member is specifically asking about menopause/perimenopause specialty.",
@@ -318,6 +327,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Operational question about Rx management flow. Tests clear explanation of the refill process.",
@@ -350,6 +360,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests care team messaging vs. appointment routing for clinical decisions. Member is looking for the fastest path to relief.",
@@ -390,6 +401,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests knowledge of included program benefits and the booking flow for allied health consultations.",
@@ -434,6 +446,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Commitment anxiety. Tests cancellation policy clarity — member is asking specifically because of side effects, not buyer's remorse.",
@@ -466,6 +479,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests program boundary clarity and continuity of care pathway. Member is worried about being left without support after the program ends.",
@@ -498,6 +512,7 @@ export const programScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Program & App",
     memberContext:
       "Tests Maven Clinic pay-as-you-go explanation. Member is hesitant about subscriptions and wants lower commitment entry point.",

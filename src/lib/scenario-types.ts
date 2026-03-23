@@ -42,6 +42,7 @@ export interface Scenario {
   createdAt: string;
   isTemplate: boolean;
   group?: "Health" | "Program & App";
+  label?: string;
   memberContext: string;
   turns: Turn[];
   variants?: Record<string, Turn[]>;

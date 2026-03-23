@@ -8,6 +8,7 @@ export const bookProviderAppointment: Scenario = {
   author: "Maven",
   createdAt: "2026-03-20",
   isTemplate: true,
+  label: "Maven Assistant",
   memberContext:
     "A member wants to book an appointment with a medical provider. The assistant helps them find availability and complete the booking.",
   turns: [

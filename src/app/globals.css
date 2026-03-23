@@ -1,7 +1,65 @@
 @import "tailwindcss";
 
+/* ── Ivar Display @font-face ── */
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-SemiBoldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ivar Display";
+  src: url("/fonts/IvarDisplay-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
-  /* Maven brand colors (from Figma variables) */
+  /* ── Maven Assistant tokens (existing) ── */
   --color-maven-bg: #f2f0ec;
   --color-maven-surface: #ffffff;
   --color-maven-text: #191817;
@@ -20,8 +78,68 @@
   --color-maven-orb-cyan: #51d4e5;
   --color-maven-orb-blue: #66a3ff;
 
+  /* ── Freya B2C tokens (from Consumer.tokens323226.json) ── */
+
+  /* Text */
+  --color-b2c-text-primary: #191817;
+  --color-b2c-text-secondary: #5C5954;
+  --color-b2c-text-tertiary: #A6A39E;
+  --color-b2c-text-disabled: #BAB7B3;
+  --color-b2c-text-button-primary: #FFFFFF;
+  --color-b2c-text-button-secondary: #035748;
+  --color-b2c-text-link: #035748;
+  --color-b2c-text-link-hover: #013126;
+  --color-b2c-text-success: #00826A;
+  --color-b2c-text-warning: #DD6A02;
+  --color-b2c-text-error: #EA2F0D;
+  --color-b2c-text-attention: #003D99;
+  --color-b2c-text-accent-maven: #035748;
+  --color-b2c-text-inverse: #FFFFFF;
+
+  /* Icon */
+  --color-b2c-icon-primary: #191817;
+  --color-b2c-icon-secondary: #5C5954;
+  --color-b2c-icon-tertiary: #A6A39E;
+  --color-b2c-icon-maven: #035748;
+  --color-b2c-icon-natural: #AA8965;
+
+  /* Surface */
+  --color-b2c-surface-primary: #FFFFFF;
+  --color-b2c-surface-secondary: #F2F0EC;
+  --color-b2c-surface-tertiary: #E9E1D5;
+  --color-b2c-surface-brand: #013126;
+  --color-b2c-surface-b2c: #00826A;
+  --color-b2c-surface-success: #E7FAF3;
+  --color-b2c-surface-warning: #FFF5D1;
+  --color-b2c-surface-error: #FFF0EE;
+  --color-b2c-surface-attention: #E5F0FF;
+
+  /* Fill */
+  --color-b2c-fill-button-primary: #035748;
+  --color-b2c-fill-button-secondary: #FFFFFF;
+  --color-b2c-fill-button-tertiary: #E3E2E0;
+  --color-b2c-fill-button-destructive: #A41604;
+  --color-b2c-fill-button-disabled: #F8F7F7;
+  --color-b2c-fill-button-subtle: #F2F0EC;
+  --color-b2c-fill-success: #00826A;
+  --color-b2c-fill-error: #A41604;
+  --color-b2c-fill-accent-mint: #9BF4C7;
+  --color-b2c-fill-accent-mango: #FEE9CD;
+  --color-b2c-fill-accent-lychee: #FFF0EE;
+  --color-b2c-fill-accent-coconut: #F2F0EC;
+
+  /* Border */
+  --color-b2c-border-primary: #BAB7B3;
+  --color-b2c-border-disabled: #E3E2E0;
+  --color-b2c-border-brand: #035748;
+  --color-b2c-border-natural: #E2D8C8;
+  --color-b2c-border-subtle: #D2C4AD;
+  --color-b2c-border-success: #00826A;
+  --color-b2c-border-error: #EA2F0D;
+
   /* Typography */
   --font-family-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family-b2c-emphasis: "Ivar Display", Georgia, serif;
 
   /* Spacing scale */
   --spacing-chat: 16px;

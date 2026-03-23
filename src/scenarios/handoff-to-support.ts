@@ -8,6 +8,7 @@ export const handoffToSupport: Scenario = {
   author: "Maven",
   createdAt: "2026-03-20",
   isTemplate: true,
+  label: "Maven Assistant",
   memberContext:
     "A member asks about a billing issue that the AI cannot resolve. The assistant escalates to a human support agent.",
   turns: [

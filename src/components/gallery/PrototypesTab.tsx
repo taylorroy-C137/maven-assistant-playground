@@ -1,22 +1,79 @@
 import type { Scenario } from "@/lib/scenario-types";
-import { groupByMonth } from "@/lib/scenario-registry";
+import type { Screen } from "@/lib/screen-types";
 import { PrototypeRow } from "./PrototypeRow";
+
+interface PrototypeEntry {
+  id: string;
+  title: string;
+  description: string;
+  label: string;
+  createdAt: string;
+  author?: string;
+  kind: "scenario" | "screen";
+}
 
 interface PrototypesTabProps {
   scenarios: Scenario[];
+  screens: Screen[];
   searchQuery: string;
 }
 
-export function PrototypesTab({ scenarios, searchQuery }: PrototypesTabProps) {
-  const filtered = searchQuery
-    ? scenarios.filter(
-        (s) =>
-          s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          s.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    : scenarios;
+function groupByLabel(entries: PrototypeEntry[]): { label: string; items: PrototypeEntry[] }[] {
+  const groups = new Map<string, PrototypeEntry[]>();
 
-  const groups = groupByMonth(filtered);
+  for (const entry of entries) {
+    const label = entry.label || "Other";
+    if (!groups.has(label)) groups.set(label, []);
+    groups.get(label)!.push(entry);
+  }
+
+  for (const items of groups.values()) {
+    items.sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
+  }
+
+  const ORDER = ["Consumer", "Maven Assistant", "Enterprise"];
+  const sorted = Array.from(groups.entries()).sort(([a], [b]) => {
+    const ai = ORDER.indexOf(a);
+    const bi = ORDER.indexOf(b);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
+
+  return sorted.map(([label, items]) => ({ label, items }));
+}
+
+export function PrototypesTab({ scenarios, screens, searchQuery }: PrototypesTabProps) {
+  const scenarioEntries: PrototypeEntry[] = scenarios.map((s) => ({
+    id: s.id,
+    title: s.title,
+    description: s.description,
+    label: s.label || "Maven Assistant",
+    createdAt: s.createdAt,
+    author: s.author,
+    kind: "scenario",
+  }));
+
+  const screenEntries: PrototypeEntry[] = screens.map((s) => ({
+    id: s.id,
+    title: s.title,
+    description: s.description,
+    label: s.label,
+    createdAt: s.createdAt,
+    kind: "screen",
+  }));
+
+  const all = [...scenarioEntries, ...screenEntries];
+
+  const filtered = searchQuery
+    ? all.filter(
+        (e) =>
+          e.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          e.description.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    : all;
+
+  const groups = groupByLabel(filtered);
 
   if (filtered.length === 0) {
     return (
@@ -37,8 +94,8 @@ export function PrototypesTab({ scenarios, searchQuery }: PrototypesTabProps) {
               {group.label}
             </span>
           </div>
-          {group.items.map((scenario) => (
-            <PrototypeRow key={scenario.id} scenario={scenario} />
+          {group.items.map((entry) => (
+            <PrototypeRow key={`${entry.kind}-${entry.id}`} entry={entry} />
           ))}
         </div>
       ))}

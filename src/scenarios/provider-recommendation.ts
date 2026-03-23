@@ -8,6 +8,7 @@ export const providerRecommendation: Scenario = {
   author: "Maven",
   createdAt: "2026-03-20",
   isTemplate: true,
+  label: "Maven Assistant",
   memberContext:
     "A member describes symptoms and the assistant recommends an appropriate specialist from their care team.",
   turns: [

@@ -8,6 +8,7 @@ export const agentAdvice: Scenario = {
   author: "Maven",
   createdAt: "2026-03-20",
   isTemplate: true,
+  label: "Maven Assistant",
   memberContext:
     "A member asks the Maven Assistant a general wellness question and receives advice with follow-up options.",
   turns: [

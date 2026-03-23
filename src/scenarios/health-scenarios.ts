@@ -8,6 +8,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "A new member considering GLP-1 treatment asks a very common first question about the two most well-known semaglutide brands.",
@@ -40,6 +41,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Sofia persona, 42 years old. Still carrying weight from her last pregnancy 2 years ago despite diet and exercise. Suspects hormones may be involved. Tests hormone-weight crossover nuance.",
@@ -84,6 +86,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Member started semaglutide 3 days ago. Nausea is severe. Tests reassurance plus escalation guidance — most common GLP-1 complaint.",
@@ -148,6 +151,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "High-anxiety question from a member already dealing with hair thinning. Tests empathetic, honest answering without dismissing fear.",
@@ -180,6 +184,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Common Reddit pattern — member has the misconception that you need to stop getting your period to be in perimenopause. Tests correcting the misconception empathetically.",
@@ -212,6 +217,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "High-emotion question. Mother had breast cancer at 58. Tests nuanced safety answering without dismissing her fear — the WHI study is widely misunderstood.",
@@ -244,6 +250,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Emerging hot topic — multi-condition question. Member doesn't know where to start. Tests combined guidance for GLP-1 + hormone care.",
@@ -287,6 +294,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Informed user testing clinical dosing knowledge and when to escalate to a provider.",
@@ -319,6 +327,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Informed, health-conscious user, age 42. Already thinking about bone density. Tests nutrition and lifestyle guidance.",
@@ -351,6 +360,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Relatable frustration. Member is doing the same things as before but gaining weight around the stomach. Tests empathetic metabolic explanation.",
@@ -383,6 +393,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Informed user exploring HRT options. Tests knowledge of delivery method differences including safety profile variations.",
@@ -415,6 +426,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Top Reddit fear. Tests honest, balanced answer without dismissing concern or being overly negative.",
@@ -447,6 +459,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "High-anxiety question. Member is losing words at work and walking into rooms with no memory of why. Tests reassurance without dismissing concern.",
@@ -479,6 +492,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Quintessential Sofia question. Tests differential nuance between postpartum and perimenopausal symptoms in a woman in her 40s.",
@@ -511,6 +525,7 @@ export const healthScenarios: Scenario[] = [
     author: "Maven",
     createdAt: "2026-03-23",
     isTemplate: false,
+    label: "Maven Assistant",
     group: "Health",
     memberContext:
       "Tests nuanced hormone vs. mental health distinction. Member doesn't want antidepressants if HRT is the right answer.",

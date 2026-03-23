@@ -7,6 +7,7 @@ import { TemplatesTab } from "@/components/gallery/TemplatesTab";
 import { DesignSystemTab } from "@/components/gallery/DesignSystemTab";
 import { NewPrototypeModal } from "@/components/gallery/NewPrototypeModal";
 import { allScenarios, templates } from "@/lib/scenario-registry";
+import { allScreens } from "@/lib/screen-registry";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("Prototypes");
@@ -25,7 +26,11 @@ export default function Home() {
 
       <main className="max-w-4xl mx-auto">
         {activeTab === "Prototypes" && (
-          <PrototypesTab scenarios={allScenarios} searchQuery={searchQuery} />
+          <PrototypesTab
+            scenarios={allScenarios}
+            screens={allScreens}
+            searchQuery={searchQuery}
+          />
         )}
         {activeTab === "Templates" && (
           <TemplatesTab templates={templates} searchQuery={searchQuery} />

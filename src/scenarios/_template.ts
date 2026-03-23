@@ -7,6 +7,7 @@ export const template: Scenario = {
   author: "Maven",
   createdAt: new Date().toISOString().split("T")[0],
   isTemplate: true,
+  label: "Maven Assistant",
   memberContext: "Describe the member and their situation here.",
   turns: [
     {

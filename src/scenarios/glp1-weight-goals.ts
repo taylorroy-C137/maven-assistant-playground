@@ -8,6 +8,7 @@ export const glp1WeightGoals: Scenario = {
   author: "Taylor",
   createdAt: "2026-03-23",
   isTemplate: false,
+  label: "Maven Assistant",
   memberContext:
     "Clara, 38, has been on semaglutide for 6 weeks. She wants to understand what realistic weight-loss milestones look like and whether her progress is on track.",
   turns: [

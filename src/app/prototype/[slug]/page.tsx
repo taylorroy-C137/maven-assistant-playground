@@ -22,7 +22,7 @@ export default function PrototypePage({
       className="min-h-dvh flex items-center justify-center py-10 px-6"
       style={{
         background:
-          "radial-gradient(ellipse at 60% 30%, #2c3e50 0%, #1a1a2e 50%, #0f0f1a 100%)",
+          "radial-gradient(ellipse at 50% 40%, #d6cfc4 0%, #c4bdb2 60%, #b8b0a4 100%)",
       }}
     >
       <PhoneFrame>

@@ -83,7 +83,7 @@ export function ChatShell({
   const variantKeys = variants ? Object.keys(variants) : [];
 
   return (
-    <div className="relative w-full max-w-[375px] mx-auto h-dvh flex flex-col bg-maven-bg overflow-hidden">
+    <div className="relative w-full h-full flex flex-col bg-maven-bg overflow-hidden">
       <GradientBackground />
 
       <GlassLayer className="relative z-10 flex items-center gap-3 px-4 py-3 rounded-b-2xl border-b border-white/20">

@@ -4,6 +4,7 @@ import { FreyaBadge } from "./FreyaBadge";
 import { FreyaButton } from "./FreyaButton";
 
 interface FreyaTaskCardProps {
+  overline?: string;
   badge?: string;
   badgeVariant?: "maven" | "success" | "warning" | "error" | "neutral" | "accent";
   title: string;
@@ -15,6 +16,7 @@ interface FreyaTaskCardProps {
 }
 
 export function FreyaTaskCard({
+  overline,
   badge,
   badgeVariant = "maven",
   title,
@@ -33,8 +35,15 @@ export function FreyaTaskCard({
       }}
     >
       <div className="flex items-start justify-between">
-        <div className="flex flex-col gap-1.5">
-          {badge && <FreyaBadge label={badge} variant={badgeVariant} />}
+        <div className="flex flex-col gap-1.5 flex-1">
+          {overline && (
+            <span
+              className="text-[10px] font-medium uppercase tracking-wider"
+              style={{ color: "var(--color-b2c-text-tertiary)" }}
+            >
+              {overline}
+            </span>
+          )}
           <h3
             className="text-base font-semibold leading-snug"
             style={{ color: "var(--color-b2c-text-primary)" }}
@@ -42,6 +51,11 @@ export function FreyaTaskCard({
             {title}
           </h3>
         </div>
+        {badge && (
+          <div className="flex-shrink-0 ml-3">
+            <FreyaBadge label={badge} variant={badgeVariant} />
+          </div>
+        )}
       </div>
       {description && (
         <p

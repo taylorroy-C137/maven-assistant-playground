@@ -137,9 +137,95 @@
   --color-b2c-border-success: #00826A;
   --color-b2c-border-error: #EA2F0D;
 
+  /* ── Enterprise (MDL) tokens — Enterprise mode from Maven Design Language ── */
+
+  /* Text */
+  --color-enterprise-text-primary: #191817;
+  --color-enterprise-text-secondary: #5C5954;
+  --color-enterprise-text-tertiary: #A6A39E;
+  --color-enterprise-text-disabled: #BAB7B3;
+  --color-enterprise-text-button-primary: #FFFFFF;
+  --color-enterprise-text-button-secondary: #035748;
+  --color-enterprise-text-link: #00826A;
+  --color-enterprise-text-link-hover: #035748;
+  --color-enterprise-text-success: #00826A;
+  --color-enterprise-text-warning: #DD6A02;
+  --color-enterprise-text-error: #A41604;
+  --color-enterprise-text-attention: #003D99;
+  --color-enterprise-text-accent-maven: #035748;
+  --color-enterprise-text-accent-lavender: #2E036F;
+  --color-enterprise-text-inverse: #FFFFFF;
+
+  /* Icon */
+  --color-enterprise-icon-primary: #191817;
+  --color-enterprise-icon-secondary: #5C5954;
+  --color-enterprise-icon-tertiary: #A6A39E;
+  --color-enterprise-icon-disabled: #CFCDCA;
+  --color-enterprise-icon-maven: #035748;
+  --color-enterprise-icon-maven-subtle: #028C74;
+  --color-enterprise-icon-natural: #AA8965;
+  --color-enterprise-icon-success: #00826A;
+  --color-enterprise-icon-warning: #DD6A02;
+  --color-enterprise-icon-error: #A41604;
+  --color-enterprise-icon-attention: #003D99;
+
+  /* Surface */
+  --color-enterprise-surface-primary: #FFFFFF;
+  --color-enterprise-surface-secondary: #FAF9F7;
+  --color-enterprise-surface-tertiary: #F2F0EC;
+  --color-enterprise-surface-brand: #013126;
+  --color-enterprise-surface-overlay: #00000066;
+  --color-enterprise-surface-success: #E7FAF3;
+  --color-enterprise-surface-warning: #FFF5D1;
+  --color-enterprise-surface-error: #FFF0EE;
+  --color-enterprise-surface-attention: #E5F0FF;
+
+  /* Fill */
+  --color-enterprise-fill-button-primary: #035748;
+  --color-enterprise-fill-button-secondary: transparent;
+  --color-enterprise-fill-button-tertiary: #E3E2E0;
+  --color-enterprise-fill-button-ghost: transparent;
+  --color-enterprise-fill-button-destructive: #A41604;
+  --color-enterprise-fill-button-disabled: #F8F7F7;
+  --color-enterprise-fill-button-subtle: #EDE9E3;
+  --color-enterprise-fill-success-primary: #00826A;
+  --color-enterprise-fill-success-secondary: #D2F2E9;
+  --color-enterprise-fill-error-primary: #A41604;
+  --color-enterprise-fill-error-secondary: #FEF5F3;
+  --color-enterprise-fill-warning-secondary: #FEF4E6;
+  --color-enterprise-fill-attention-secondary: #F2F7FF;
+  --color-enterprise-fill-accent-mint: #9BF4C7;
+  --color-enterprise-fill-accent-chartreuse: #F5FFE3;
+  --color-enterprise-fill-accent-mango: #FEE9CD;
+  --color-enterprise-fill-accent-lychee: #FFCCC2;
+  --color-enterprise-fill-accent-blueberry: #E5F0FF;
+  --color-enterprise-fill-accent-cornflower: #D4F4F9;
+  --color-enterprise-fill-accent-lavender: #EDE6F8;
+  --color-enterprise-fill-accent-coconut: #F2F0EC;
+  --color-enterprise-fill-accent-brand: #013126;
+  --color-enterprise-fill-input-default: #FFFFFF;
+  --color-enterprise-fill-input-disabled: #F8F7F7;
+
+  /* Border */
+  --color-enterprise-border-primary: #BAB7B3;
+  --color-enterprise-border-disabled: #E3E2E0;
+  --color-enterprise-border-brand: #035748;
+  --color-enterprise-border-natural: #EDE9E3;
+  --color-enterprise-border-subtle: #D2C4AD;
+  --color-enterprise-border-success: #00826A;
+  --color-enterprise-border-warning: #DD6A02;
+  --color-enterprise-border-error: #A41604;
+  --color-enterprise-border-attention: #0066FF;
+  --color-enterprise-border-input-empty: #E3E2E0;
+  --color-enterprise-border-input-hover: #A6A39E;
+  --color-enterprise-border-input-focus: #035748;
+  --color-enterprise-border-input-error: #A41604;
+  --color-enterprise-border-input-disabled: #E3E2E0;
+
   /* Typography */
   --font-family-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-b2c-emphasis: "Ivar Display", Georgia, serif;
+  --font-family-enterprise-emphasis: "Ivar Display", Georgia, serif;
 
   /* Spacing scale */
   --spacing-chat: 16px;

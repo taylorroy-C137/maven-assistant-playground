@@ -15,6 +15,7 @@ const TEMPLATES = [
   { id: "consumer-home", name: "Consumer Home" },
   { id: "consumer-care", name: "Consumer Care" },
   { id: "consumer-rx", name: "Consumer Rx" },
+  { id: "enterprise-dashboard", name: "Enterprise Dashboard" },
 ];
 
 function toSlug(name: string): string {

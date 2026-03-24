@@ -1,6 +1,6 @@
 ---
 description: Rules for building prototypes in the Maven Consumer Playground
-globs: ["src/app/**/page.tsx", "src/screens/**", "src/components/freya/**"]
+globs: ["src/app/**/page.tsx", "src/screens/**", "src/components/freya/**", "src/components/enterprise/**"]
 ---
 
 # Maven Consumer Playground — Prototype Rules
@@ -85,6 +85,73 @@ Look at these files for high-quality examples:
 - `src/screens/care-glp1.tsx` — Care screen with appointments, accordion, content
 - `src/screens/rx.tsx` — Rx screen with list/detail views and local state
 
+## Enterprise (MDL) prototypes
+
+### Components
+
+Always import from the barrel file:
+
+```tsx
+import { MdlHeader, MdlButton, MdlCard, MdlAlert, ... } from "@/components/enterprise";
+```
+
+Available components:
+- `MdlButton` — primary/secondary/ghost/destructive buttons (`variant`, `size="sm"|"md"|"lg"`, `disabled`)
+- `MdlTextInput` — text input with label, error, disabled states (`label`, `placeholder`, `error`, `disabled`)
+- `MdlBadge` — status badges (`variant="maven"|"success"|"warning"|"error"|"attention"|"neutral"`, `label`)
+- `MdlCard` — content card with title, description, children, optional onClick
+- `MdlAlert` — inline alert with icon (`variant="success"|"warning"|"error"|"info"`, `title`, `message`, `onDismiss`)
+- `MdlHeader` — app header with Maven logo (`title`, `actions`)
+- `MdlFooter` — simple footer with Maven branding
+- `MdlAvatar` — circle avatar with initials fallback (`name`, `src`, `size="sm"|"md"|"lg"`)
+- `MdlListItem` — list row with label, value, optional chevron (`label`, `value`, `onClick`)
+- `MdlModal` — overlay dialog (`title`, `children`, `onClose`, `actions`)
+
+### Screen wrapper
+
+Always wrap Enterprise screens in `EnterpriseShell`:
+
+```tsx
+import { EnterpriseShell } from "@/components/screen/EnterpriseShell";
+
+export default function MyScreen() {
+  return (
+    <EnterpriseShell>
+      <MdlHeader title="Dashboard" />
+      <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 16 }}>
+        {/* Content here */}
+      </div>
+      <MdlFooter />
+    </EnterpriseShell>
+  );
+}
+```
+
+### Design tokens (CSS variables)
+
+- Text: `var(--color-enterprise-text-primary)`, `var(--color-enterprise-text-secondary)`, `var(--color-enterprise-text-tertiary)`, `var(--color-enterprise-text-link)`, `var(--color-enterprise-text-error)`
+- Icon: `var(--color-enterprise-icon-primary)`, `var(--color-enterprise-icon-maven)`, `var(--color-enterprise-icon-success)`
+- Surface: `var(--color-enterprise-surface-primary)`, `var(--color-enterprise-surface-secondary)`, `var(--color-enterprise-surface-tertiary)`, `var(--color-enterprise-surface-brand)`
+- Fill: `var(--color-enterprise-fill-button-primary)`, `var(--color-enterprise-fill-accent-mint)`, `var(--color-enterprise-fill-accent-brand)`
+- Border: `var(--color-enterprise-border-primary)`, `var(--color-enterprise-border-natural)`, `var(--color-enterprise-border-brand)`, `var(--color-enterprise-border-input-focus)`
+- Headings: use `fontFamily: "var(--font-family-enterprise-emphasis)"` (Ivar Display) for display headings
+- Body text: uses `var(--font-family-sans)` automatically via EnterpriseShell
+
+### Typography pattern for headings
+
+```tsx
+<h1 style={{
+  fontSize: 28,
+  lineHeight: 1.2,
+  fontFamily: "var(--font-family-enterprise-emphasis)",
+  color: "var(--color-enterprise-text-primary)",
+  fontWeight: 400,
+  fontStyle: "italic",
+}}>
+  Member Dashboard
+</h1>
+```
+
 ## Maven Assistant (chat) prototypes
 
 - Use `ChatShell` from `src/components/chat/ChatShell.tsx`
@@ -95,7 +162,7 @@ Look at these files for high-quality examples:
 ## When asked to create a new prototype
 
 1. If `metadata.json` already exists, create/edit `page.tsx` in the same directory.
-2. Choose Consumer (ScreenShell + Freya) or Maven Assistant (ChatShell) based on the request.
+2. Choose Consumer (ScreenShell + Freya), Enterprise (EnterpriseShell + Mdl), or Maven Assistant (ChatShell) based on the request.
 3. Use real, specific content — not placeholder lorem ipsum.
-4. Use existing Freya components before building custom UI.
+4. Use existing components before building custom UI.
 5. Test at `http://localhost:3000/{designer}/{slug}`.

@@ -21,6 +21,8 @@ export function getPageTemplate(
       return consumerCareTemplate(componentName);
     case "consumer-rx":
       return consumerRxTemplate(componentName);
+    case "enterprise-dashboard":
+      return enterpriseDashboardTemplate(componentName, title);
     case "maven-assistant":
       return mavenAssistantTemplate(componentName, title);
     default:
@@ -370,6 +372,88 @@ export default function ${name}() {
       </div>
       <FreyaFooter />
     </ScreenShell>
+  );
+}
+`;
+}
+
+function enterpriseDashboardTemplate(name: string, title: string): string {
+  return `"use client";
+
+import { EnterpriseShell } from "@/components/screen/EnterpriseShell";
+import {
+  MdlHeader,
+  MdlCard,
+  MdlAlert,
+  MdlButton,
+  MdlBadge,
+  MdlListItem,
+  MdlAvatar,
+  MdlFooter,
+} from "@/components/enterprise";
+
+export default function ${name}() {
+  return (
+    <EnterpriseShell>
+      <MdlHeader title="${title}" />
+
+      <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 16 }}>
+        <h1
+          style={{
+            fontSize: 28,
+            lineHeight: 1.2,
+            fontFamily: "var(--font-family-enterprise-emphasis)",
+            color: "var(--color-enterprise-text-primary)",
+            fontWeight: 400,
+            fontStyle: "italic",
+          }}
+        >
+          ${title}
+        </h1>
+
+        <MdlAlert
+          variant="info"
+          title="Welcome"
+          message="This is your Enterprise dashboard prototype. Customize it to explore different layouts and flows."
+        />
+
+        <MdlCard
+          title="Getting started"
+          description="Use the Enterprise components to build member dashboards, admin views, and internal tools."
+        >
+          <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+            <MdlBadge label="Enterprise" variant="maven" />
+            <MdlBadge label="Dashboard" variant="neutral" />
+          </div>
+        </MdlCard>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 0" }}>
+          <MdlAvatar name="Sarah Johnson" size="lg" />
+          <div>
+            <p style={{ fontSize: 16, fontWeight: 600, color: "var(--color-enterprise-text-primary)", margin: 0 }}>
+              Sarah Johnson
+            </p>
+            <p style={{ fontSize: 14, color: "var(--color-enterprise-text-secondary)", margin: 0 }}>
+              Member since January 2026
+            </p>
+          </div>
+        </div>
+
+        <div style={{ borderRadius: 12, border: "1px solid var(--color-enterprise-border-natural)", overflow: "hidden" }}>
+          <MdlListItem label="Appointments" value="2 upcoming" onClick={() => {}} />
+          <MdlListItem label="Messages" value="1 unread" onClick={() => {}} />
+          <MdlListItem label="Prescriptions" value="Active" onClick={() => {}} />
+          <MdlListItem label="Care Plan" onClick={() => {}} />
+        </div>
+
+        <div style={{ display: "flex", gap: 8 }}>
+          <MdlButton variant="primary" style={{ flex: 1 }}>Book Appointment</MdlButton>
+          <MdlButton variant="secondary" style={{ flex: 1 }}>Send Message</MdlButton>
+        </div>
+      </div>
+
+      <MdlFooter />
+    </EnterpriseShell>
   );
 }
 `;

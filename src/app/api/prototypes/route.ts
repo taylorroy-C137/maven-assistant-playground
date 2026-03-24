@@ -88,11 +88,13 @@ export async function POST(request: Request) {
 
   fs.mkdirSync(protoDir, { recursive: true });
 
+  const isConsumer = template?.startsWith("consumer");
+  const isEnterprise = template?.startsWith("enterprise");
   const metadata = {
     title: name,
     description: description || "",
-    type: template?.startsWith("consumer") ? "screen" : "chat",
-    label: template?.startsWith("consumer") ? "Consumer" : "Maven Assistant",
+    type: isConsumer || isEnterprise ? "screen" : "chat",
+    label: isConsumer ? "Consumer" : isEnterprise ? "Enterprise" : "Maven Assistant",
     createdAt: new Date().toISOString().split("T")[0],
   };
 

@@ -76,16 +76,12 @@ function mavenAssistantTemplate(name: string, title: string): string {
 
 import { useState } from "react";
 import { ChatShell } from "@/components/chat/ChatShell";
+import type { Turn } from "@/lib/scenario-types";
 
-const turns = [
+const turns: Turn[] = [
   {
-    role: "assistant" as const,
-    blocks: [
-      {
-        type: "text" as const,
-        content: "Hi there! How can I help you today?",
-      },
-    ],
+    role: "agent",
+    text: "Hi there! How can I help you today?",
   },
 ];
 

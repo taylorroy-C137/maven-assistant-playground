@@ -1,6 +1,6 @@
 ---
 description: Rules for building prototypes in the Maven Consumer Playground
-globs: ["src/app/**/page.tsx", "src/screens/**", "src/components/freya/**", "src/components/enterprise/**"]
+globs: ["**/*.ts", "**/*.tsx"]
 ---
 
 # Maven Consumer Playground — Prototype Rules
@@ -154,15 +154,57 @@ export default function MyScreen() {
 
 ## Maven Assistant (chat) prototypes
 
-- Use `ChatShell` from `src/components/chat/ChatShell.tsx`
-- Define conversation turns as a `Turn[]` array
-- See `src/scenarios/_template.ts` for the base structure
-- Use `maven-*` Tailwind tokens for styling
+### Layout
+
+- The chat shell is always 375px wide (mobile-first, matching iOS viewport). Never create wider layouts for the chat view.
+- The gallery page (`/`) is full-width desktop.
+
+### Components
+
+All chat UI components live in `src/components/chat/`. Always import from the barrel:
+
+```tsx
+import { ChatShell, MessageBubble, SmartCard, ... } from "@/components/chat";
+```
+
+Available components:
+- `ChatShell` — full chat view (title, turns, variant tabs)
+- `MessageBubble` — single message (agent/user/medical-team)
+- `Composer` — input bar
+- `PromptHScroll` — horizontal scrolling prompt suggestions
+- `ChipAction` — tappable chip
+- `SmartCard` — appointment/booking/escalation cards
+- `EscalationCard` — handoff to support card
+- `ThreadRow` — conversation list row
+- `MavenOrb` — animated Maven avatar
+- `GlassLayer` — frosted glass overlay (`backdrop-blur-xl bg-white/70`)
+- `GradientBackground` — chat gradient backdrop
+
+Never inline chat UI styles — reuse these components. If a new component type is needed, add it to `src/components/chat/` and export it from `index.ts`.
+
+### Scenarios
+
+- Chat prototypes are defined as `Scenario` objects in `src/scenarios/` (see `src/lib/scenario-types.ts` for the type).
+- After creating a scenario file, import and register it in `src/lib/prototype-registry.ts`.
+- Templates have `isTemplate: true` (shown in the Templates tab). Prototypes have `isTemplate: false`.
+- Use `src/scenarios/_template.ts` as the base structure for new scenarios.
+
+### Variants
+
+- Scenarios support `variants?: Record<string, Turn[]>` for branch points.
+- Common variant names: "Clarifying question", "Source cards", "Error / recovery", "Escalation".
+- `ChatShell` renders variant tabs automatically when variants are present.
+
+### Styling
+
+- Font family: Helvetica Neue (set in `globals.css`, do not override).
+- Use Tailwind utility classes with `maven-*` color tokens.
 
 ## When asked to create a new prototype
 
 1. If `metadata.json` already exists, create/edit `page.tsx` in the same directory.
 2. Choose Consumer (ScreenShell + Freya), Enterprise (EnterpriseShell + Mdl), or Maven Assistant (ChatShell) based on the request.
-3. Use real, specific content — not placeholder lorem ipsum.
-4. Use existing components before building custom UI.
-5. Test at `http://localhost:3000/{designer}/{slug}`.
+3. For chat prototypes: create a scenario file in `src/scenarios/`, then register it in `src/lib/prototype-registry.ts`.
+4. Use real, specific content — not placeholder lorem ipsum.
+5. Use existing components before building custom UI.
+6. Test at `http://localhost:3000/{designer}/{slug}`.

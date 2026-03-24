@@ -4,8 +4,6 @@ import path from "path";
 import { getPageTemplate } from "@/lib/page-templates";
 import { DESIGNERS } from "@/lib/prototype-types";
 
-const designerSet = new Set<string>(DESIGNERS);
-
 export async function GET() {
   const appDir = path.join(process.cwd(), "src", "app");
   const results: {
@@ -67,7 +65,17 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, description, designer, template } = await request.json();
+  let body: { name?: string; description?: string; designer?: string; template?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    );
+  }
+
+  const { name, description, designer, template } = body;
 
   if (!name || !designer) {
     return NextResponse.json(

@@ -24,30 +24,26 @@ export default function PrototypePage({
   const [activeVariant, setActiveVariant] = useState("");
 
   if (!proto) {
-    const metadataPath = `src/app/${designer}/${slug}/metadata.json`;
+    const pagePath = `src/app/${designer}/${slug}/page.tsx`;
     return (
       <div className="min-h-dvh flex items-center justify-center bg-gray-50">
         <div className="bg-white rounded-2xl shadow-lg px-12 py-10 flex flex-col items-center gap-5 max-w-md">
           <h1 className="text-2xl font-bold text-gray-900">
             {slugToTitle(slug)}
           </h1>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="px-4 py-2 text-sm font-medium text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              Go Back
-            </Link>
-            <a
-              href={`cursor://file/Users/taylorroy/Documents/maven-assistant-playground/${metadataPath}`}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              Open in Cursor
-            </a>
-          </div>
-          <p className="text-xs text-gray-400 text-center">
-            Create prototypes locally by running <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-500">npm run dev</code>
+          <p className="text-sm text-gray-500 text-center">
+            This prototype needs a <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-600">page.tsx</code> file.
+            Open it in Cursor:
           </p>
+          <code className="text-xs bg-gray-100 px-3 py-2 rounded-lg text-gray-600 text-center break-all select-all">
+            {pagePath}
+          </code>
+          <Link
+            href="/"
+            className="px-4 py-2 text-sm font-medium text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            Go Back
+          </Link>
         </div>
       </div>
     );

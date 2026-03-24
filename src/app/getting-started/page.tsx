@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft, Check, Copy, ExternalLink, ImageIcon } from "lucide-react";
+import { ArrowLeft, Check, Copy, ExternalLink } from "lucide-react";
 import { MavenOrb } from "@/components/chat/MavenOrb";
 
 function CopyCommand({ command }: { command: string }) {
@@ -53,54 +52,6 @@ function PhaseCard({
       <div className="space-y-4 pl-11">{children}</div>
     </div>
   );
-}
-
-function ScreenshotPlaceholder({ alt }: { alt: string }) {
-  return (
-    <div className="rounded-lg border-2 border-dashed border-maven-border bg-maven-bg/50 flex items-center justify-center gap-2 py-8 px-4">
-      <ImageIcon className="w-5 h-5 text-maven-text-muted flex-shrink-0" />
-      <p className="text-sm text-maven-text-muted text-center">{alt}</p>
-    </div>
-  );
-}
-
-function GuideScreenshot({
-  src,
-  alt,
-}: {
-  src: string;
-  alt: string;
-}) {
-  return (
-    <div className="rounded-lg overflow-hidden border border-maven-border">
-      <Image
-        src={src}
-        alt={alt}
-        width={640}
-        height={400}
-        className="w-full h-auto"
-      />
-    </div>
-  );
-}
-
-function hasScreenshot(path: string): boolean {
-  // At build time all images in /public are available.
-  // We reference them optimistically; if missing the placeholder shows instead.
-  return typeof path === "string" && path.length > 0;
-}
-
-function Screenshot({
-  src,
-  alt,
-}: {
-  src?: string;
-  alt: string;
-}) {
-  if (src && hasScreenshot(src)) {
-    return <GuideScreenshot src={src} alt={alt} />;
-  }
-  return <ScreenshotPlaceholder alt={alt} />;
 }
 
 export default function GettingStartedPage() {
@@ -218,8 +169,6 @@ export default function GettingStartedPage() {
                 ). Paste these two commands one at a time:
               </p>
 
-              <Screenshot alt="Screenshot: The terminal panel at the bottom of Cursor where you paste commands" />
-
               <div className="space-y-3">
                 <div>
                   <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
@@ -284,11 +233,6 @@ export default function GettingStartedPage() {
                 gallery:
               </p>
 
-              <Screenshot
-                src="/guide/gallery-header.png"
-                alt="Screenshot: The gallery header in your browser showing the 'Get Started' and '+ New' buttons"
-              />
-
               <ol className="text-sm text-maven-text-secondary space-y-1.5 list-decimal pl-4">
                 <li>Pick your name from the Designer dropdown</li>
                 <li>Choose a template (e.g. Consumer Home, Consumer Care)</li>
@@ -301,10 +245,6 @@ export default function GettingStartedPage() {
                 prototype files:
               </p>
 
-              <Screenshot
-                src="/guide/success-modal.png"
-                alt="Screenshot: The success modal after creating a prototype, with 'Open in Cursor' button"
-              />
             </PhaseCard>
 
             <PhaseCard number={5} title="Edit with AI">
@@ -355,8 +295,6 @@ export default function GettingStartedPage() {
                   ) — the browser refreshes automatically
                 </li>
               </ol>
-
-              <Screenshot alt="Screenshot: The Cmd+I AI prompt in Cursor where you type instructions in plain English" />
 
               <div className="bg-maven-highlight rounded-lg p-4">
                 <p className="text-sm text-maven-text">

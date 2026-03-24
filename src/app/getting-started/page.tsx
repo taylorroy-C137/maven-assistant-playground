@@ -78,7 +78,7 @@ export default function GettingStartedPage() {
             Build your first prototype in 5 minutes
           </h1>
           <p className="text-base text-maven-text-secondary leading-relaxed">
-            The Maven Consumer Playground lets you create and share interactive
+            The Maven Prototype Playground lets you create and share interactive
             prototypes using AI. No coding experience needed — you describe what
             you want in plain English, and Cursor builds it for you.
           </p>

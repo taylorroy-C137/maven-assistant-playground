@@ -29,7 +29,7 @@ export function GalleryHeader({
           <div className="flex items-center gap-3">
             <MavenOrb size={28} />
             <h1 className="text-xl font-semibold text-maven-text">
-              Maven Consumer Playground
+              Maven Prototype Playground
             </h1>
           </div>
 

@@ -1,9 +1,9 @@
 ---
-description: Rules for building prototypes in the Maven Consumer Playground
+description: Rules for building prototypes in the Maven Prototype Playground
 globs: ["**/*.ts", "**/*.tsx"]
 ---
 
-# Maven Consumer Playground — Prototype Rules
+# Maven Prototype Playground — Prototype Rules
 
 ## Project structure
 

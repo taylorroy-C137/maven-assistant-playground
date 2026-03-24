@@ -1,4 +1,4 @@
-# Maven Consumer Playground
+# Maven Prototype Playground
 
 A playground for viewing and building Maven prototypes — Consumer screens, Maven Assistant conversations, and more.
 

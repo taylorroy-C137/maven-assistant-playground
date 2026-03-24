@@ -47,7 +47,7 @@ export default function LoginPage() {
             </svg>
           </div>
           <h1 className="text-xl font-semibold text-maven-text">
-            Maven Assistant Playground
+            Maven Prototype Playground
           </h1>
           <p className="text-sm text-maven-text-secondary mt-1">
             Enter the password to continue

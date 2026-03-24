@@ -36,27 +36,35 @@ export function PrototypePageLayout({
       }}
     >
       <div className="flex items-center gap-12 max-w-[900px] w-full">
-        {/* Left: metadata */}
-        <div className="flex-1 flex flex-col gap-4 min-w-0">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors w-fit"
+        {/* Left: metadata card */}
+        <div className="flex-1 min-w-0">
+          <div
+            className="rounded-2xl p-6 flex flex-col gap-4 backdrop-blur-xl"
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+            }}
           >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Playground
-          </Link>
-
-          <div className="flex flex-col gap-3 mt-2">
-            <span
-              className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide w-fit"
-              style={{ backgroundColor: lc.bg, color: lc.color }}
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors w-fit"
             >
-              {label}
-            </span>
-            <h1 className="text-2xl font-semibold text-white">{title}</h1>
-            <p className="text-sm text-white/60 leading-relaxed">
-              {description}
-            </p>
+              <ArrowLeft className="w-4 h-4" />
+              Back to Playground
+            </Link>
+
+            <div className="flex flex-col gap-3">
+              <span
+                className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide w-fit"
+                style={{ backgroundColor: lc.bg, color: lc.color }}
+              >
+                {label}
+              </span>
+              <h1 className="text-2xl font-semibold text-white">{title}</h1>
+              <p className="text-sm text-white/60 leading-relaxed">
+                {description}
+              </p>
+            </div>
           </div>
         </div>
 

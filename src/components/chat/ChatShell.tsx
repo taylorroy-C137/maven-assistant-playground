@@ -71,12 +71,6 @@ export function ChatShell({
     return () => clearTimeout(timer);
   }, [currentIndex, activeTurns]);
 
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [visibleTurns]);
-
   const lastTurn = visibleTurns[visibleTurns.length - 1];
   const showChips = lastTurn?.chips && lastTurn.chips.length > 0 && !lastTurn.generating;
 

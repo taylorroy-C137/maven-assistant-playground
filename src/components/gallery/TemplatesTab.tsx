@@ -1,17 +1,17 @@
-import type { Scenario } from "@/lib/scenario-types";
+import type { Prototype } from "@/lib/prototype-types";
 import { TemplateRow } from "./TemplateRow";
 
 interface TemplatesTabProps {
-  templates: Scenario[];
+  templates: Prototype[];
   searchQuery: string;
 }
 
 export function TemplatesTab({ templates, searchQuery }: TemplatesTabProps) {
   const filtered = searchQuery
     ? templates.filter(
-        (s) =>
-          s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          s.description.toLowerCase().includes(searchQuery.toLowerCase()),
+        (t) =>
+          t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          t.description.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : templates;
 
@@ -26,7 +26,7 @@ export function TemplatesTab({ templates, searchQuery }: TemplatesTabProps) {
   return (
     <div className="divide-y divide-maven-border">
       {filtered.map((t) => (
-        <TemplateRow key={t.id} scenario={t} />
+        <TemplateRow key={t.slug} prototype={t} />
       ))}
     </div>
   );

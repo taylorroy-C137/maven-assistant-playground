@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Maven Assistant Playground",
-  description: "Prototype shell for Maven Assistant scenarios",
+  title: "Maven Consumer Playground",
+  description: "Prototype playground for Maven Consumer and Assistant experiences",
 };
 
 export default function RootLayout({

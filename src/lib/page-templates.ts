@@ -1,8 +1,10 @@
 function toPascalCase(slug: string): string {
-  return slug
+  const name = slug
     .split("-")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join("");
+  // JS identifiers can't start with a digit
+  return /^\d/.test(name) ? "P" + name : name;
 }
 
 export function getPageTemplate(

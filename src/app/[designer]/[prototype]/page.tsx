@@ -24,6 +24,7 @@ export default function PrototypePage({
   const [activeVariant, setActiveVariant] = useState("");
 
   if (!proto) {
+    const metadataPath = `src/app/${designer}/${slug}/metadata.json`;
     return (
       <div className="min-h-dvh flex items-center justify-center bg-gray-50">
         <div className="bg-white rounded-2xl shadow-lg px-12 py-10 flex flex-col items-center gap-5 max-w-md">
@@ -38,12 +39,15 @@ export default function PrototypePage({
               Go Back
             </Link>
             <a
-              href="cursor://file/Users/taylorroy/Documents/maven-assistant-playground"
+              href={`cursor://file/Users/taylorroy/Documents/maven-assistant-playground/${metadataPath}`}
               className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
             >
               Open in Cursor
             </a>
           </div>
+          <p className="text-xs text-gray-400 text-center">
+            Create prototypes locally by running <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-500">npm run dev</code>
+          </p>
         </div>
       </div>
     );

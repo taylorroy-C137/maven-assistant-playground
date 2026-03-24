@@ -38,7 +38,7 @@ export default function PrototypePage({
               Go Back
             </Link>
             <a
-              href={`cursor://file/${designer}/${slug}`}
+              href={`vscode://file/Users/taylorroy/Documents/maven-assistant-playground/src/app/${designer}/${slug}`}
               className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
             >
               Open in Cursor

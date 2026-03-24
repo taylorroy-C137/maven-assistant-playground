@@ -1,6 +1,7 @@
 "use client";
 
-import { Search, Link2, Plus } from "lucide-react";
+import Link from "next/link";
+import { Search, Link2, Plus, BookOpen } from "lucide-react";
 import { MavenOrb } from "@/components/chat/MavenOrb";
 
 interface GalleryHeaderProps {
@@ -42,10 +43,13 @@ export function GalleryHeader({
                 className="pl-9 pr-4 py-2 w-48 text-sm rounded-lg border border-maven-border bg-white placeholder:text-maven-text-muted outline-none focus:border-maven-teal/50 focus:ring-1 focus:ring-maven-teal/20 transition-colors"
               />
             </div>
-            <button className="flex items-center gap-2 px-3 py-2 text-sm text-maven-text-secondary border border-maven-border rounded-lg hover:bg-maven-bg transition-colors">
-              <Link2 className="w-4 h-4" />
-              Link external
-            </button>
+            <Link
+              href="/getting-started"
+              className="flex items-center gap-2 px-3 py-2 text-sm text-maven-text-secondary border border-maven-border rounded-lg hover:bg-maven-bg transition-colors"
+            >
+              <BookOpen className="w-4 h-4" />
+              Get Started
+            </Link>
             <button
               onClick={onNew}
               className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-maven-teal rounded-lg hover:bg-maven-teal-dark transition-colors"

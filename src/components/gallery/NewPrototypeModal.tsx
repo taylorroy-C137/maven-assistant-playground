@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
+import Link from "next/link";
+import { X, CheckCircle } from "lucide-react";
 import { DESIGNERS } from "@/lib/prototype-types";
 
 interface NewPrototypeModalProps {
@@ -87,31 +88,53 @@ export function NewPrototypeModal({ onClose }: NewPrototypeModalProps) {
 
       <div className="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden">
         {created ? (
-          <div className="px-12 py-10 flex flex-col items-center gap-5">
-            <h1 className="text-2xl font-bold text-gray-900">
+          <div className="px-8 py-8 flex flex-col items-center gap-4">
+            <CheckCircle className="w-10 h-10 text-maven-teal" />
+            <h1 className="text-xl font-bold text-maven-text">
               {name.trim()}
             </h1>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={onClose}
-                className="px-4 py-2 text-sm font-medium text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                Go Back
-              </button>
-              <a
-                href={`cursor://file/Users/taylorroy/Documents/maven-assistant-playground/${metadataPath}`}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Open in Cursor
-              </a>
-            </div>
-            {isProduction && (
-              <p className="text-xs text-gray-400 text-center">
-                Create prototypes locally by running{" "}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-500">
-                  npm run dev
-                </code>
-              </p>
+            {isProduction ? (
+              <>
+                <p className="text-sm text-maven-text-secondary text-center">
+                  To start building this prototype, follow the setup guide.
+                </p>
+                <Link
+                  href="/getting-started"
+                  onClick={onClose}
+                  className="w-full px-5 py-2.5 text-sm font-medium text-white bg-maven-teal rounded-lg hover:bg-maven-teal-dark transition-colors text-center"
+                >
+                  Getting Started Guide
+                </Link>
+                <a
+                  href={`cursor://file/Users/taylorroy/Documents/maven-assistant-playground/${metadataPath}`}
+                  className="text-sm text-maven-text-tertiary hover:text-maven-text-secondary transition-colors"
+                >
+                  Already set up? Open in Cursor
+                </a>
+                <button
+                  onClick={onClose}
+                  className="text-sm text-maven-text-muted hover:text-maven-text-secondary transition-colors"
+                >
+                  Go Back
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={onClose}
+                    className="px-4 py-2 text-sm font-medium text-maven-text-secondary border border-maven-border rounded-lg hover:bg-maven-bg transition-colors"
+                  >
+                    Go Back
+                  </button>
+                  <a
+                    href={`cursor://file/Users/taylorroy/Documents/maven-assistant-playground/${metadataPath}`}
+                    className="px-4 py-2 text-sm font-medium text-white bg-maven-teal rounded-lg hover:bg-maven-teal-dark transition-colors"
+                  >
+                    Open in Cursor
+                  </a>
+                </div>
+              </>
             )}
           </div>
         ) : (

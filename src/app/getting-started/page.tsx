@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Check, Copy, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, Check, Copy, ExternalLink, ImageIcon } from "lucide-react";
 import { MavenOrb } from "@/components/chat/MavenOrb";
 
 function CopyCommand({ command }: { command: string }) {
@@ -54,6 +55,54 @@ function PhaseCard({
   );
 }
 
+function ScreenshotPlaceholder({ alt }: { alt: string }) {
+  return (
+    <div className="rounded-lg border-2 border-dashed border-maven-border bg-maven-bg/50 flex items-center justify-center gap-2 py-8 px-4">
+      <ImageIcon className="w-5 h-5 text-maven-text-muted flex-shrink-0" />
+      <p className="text-sm text-maven-text-muted text-center">{alt}</p>
+    </div>
+  );
+}
+
+function GuideScreenshot({
+  src,
+  alt,
+}: {
+  src: string;
+  alt: string;
+}) {
+  return (
+    <div className="rounded-lg overflow-hidden border border-maven-border">
+      <Image
+        src={src}
+        alt={alt}
+        width={640}
+        height={400}
+        className="w-full h-auto"
+      />
+    </div>
+  );
+}
+
+function hasScreenshot(path: string): boolean {
+  // At build time all images in /public are available.
+  // We reference them optimistically; if missing the placeholder shows instead.
+  return typeof path === "string" && path.length > 0;
+}
+
+function Screenshot({
+  src,
+  alt,
+}: {
+  src?: string;
+  alt: string;
+}) {
+  if (src && hasScreenshot(src)) {
+    return <GuideScreenshot src={src} alt={alt} />;
+  }
+  return <ScreenshotPlaceholder alt={alt} />;
+}
+
 export default function GettingStartedPage() {
   return (
     <div className="min-h-dvh bg-white">
@@ -84,103 +133,139 @@ export default function GettingStartedPage() {
           </p>
         </div>
 
-        <div className="space-y-6">
-          <PhaseCard number={1} title="Get the tools">
-            <p className="text-sm text-maven-text-secondary">
-              You need two free apps on your Mac. If you already have them, skip
-              to Phase 2.
-            </p>
+        {/* ── ONE-TIME SETUP ── */}
+        <div className="mb-10">
+          <div className="flex items-center gap-2 mb-5">
+            <span className="text-xs font-semibold uppercase tracking-wider text-maven-teal">
+              One-time setup
+            </span>
+            <span className="text-xs text-maven-text-muted">
+              — you only do this once
+            </span>
+          </div>
 
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-maven-bg flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-xs font-medium text-maven-text-secondary">a</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-maven-text">
-                    Download Cursor
-                  </p>
-                  <p className="text-sm text-maven-text-secondary mt-0.5">
-                    A code editor with built-in AI. Download it, then drag it
-                    into your Applications folder.
-                  </p>
-                  <a
-                    href="https://www.cursor.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium mt-2"
-                    style={{ color: "var(--color-maven-teal)" }}
-                  >
-                    cursor.com
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-maven-bg flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-xs font-medium text-maven-text-secondary">b</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-maven-text">
-                    Download Node.js
-                  </p>
-                  <p className="text-sm text-maven-text-secondary mt-0.5">
-                    Runs the playground on your computer. Click the LTS button
-                    and run the installer.
-                  </p>
-                  <a
-                    href="https://nodejs.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium mt-2"
-                    style={{ color: "var(--color-maven-teal)" }}
-                  >
-                    nodejs.org
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </PhaseCard>
-
-          <PhaseCard number={2} title="Get the project">
-            <p className="text-sm text-maven-text-secondary">
-              Open Cursor, then open the built-in terminal:{" "}
-              <strong>View &rarr; Terminal</strong> (or press{" "}
-              <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
-                Ctrl + `
-              </kbd>
-              ). Paste these two commands one at a time:
-            </p>
-
-            <div className="space-y-3">
-              <div>
-                <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
-                  Download the project
-                </p>
-                <CopyCommand command="git clone https://github.com/taylorroy-C137/maven-assistant-playground.git && cd maven-assistant-playground" />
-              </div>
-              <div>
-                <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
-                  Install dependencies
-                </p>
-                <CopyCommand command="npm install" />
-              </div>
-            </div>
-          </PhaseCard>
-
-          <PhaseCard number={3} title="Start building">
-            <div className="space-y-3">
-              <div>
-                <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
-                  Start the playground
-                </p>
-                <CopyCommand command="npm run dev" />
-              </div>
-
+          <div className="space-y-6">
+            <PhaseCard number={1} title="Get the tools">
               <p className="text-sm text-maven-text-secondary">
-                Open{" "}
+                You need two free apps on your Mac. If you already have them,
+                skip to Phase 2.
+              </p>
+
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-maven-bg flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-xs font-medium text-maven-text-secondary">
+                      a
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-maven-text">
+                      Download Cursor
+                    </p>
+                    <p className="text-sm text-maven-text-secondary mt-0.5">
+                      A code editor with built-in AI. Download it, then drag it
+                      into your Applications folder.
+                    </p>
+                    <a
+                      href="https://www.cursor.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium mt-2"
+                      style={{ color: "var(--color-maven-teal)" }}
+                    >
+                      cursor.com
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-maven-bg flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-xs font-medium text-maven-text-secondary">
+                      b
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-maven-text">
+                      Download Node.js
+                    </p>
+                    <p className="text-sm text-maven-text-secondary mt-0.5">
+                      Runs the playground on your computer. Click the LTS button
+                      and run the installer.
+                    </p>
+                    <a
+                      href="https://nodejs.org/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium mt-2"
+                      style={{ color: "var(--color-maven-teal)" }}
+                    >
+                      nodejs.org
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </PhaseCard>
+
+            <PhaseCard number={2} title="Get the project">
+              <p className="text-sm text-maven-text-secondary">
+                Open Cursor, then open the built-in terminal:{" "}
+                <strong>View &rarr; Terminal</strong> (or press{" "}
+                <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                  Ctrl + `
+                </kbd>
+                ). Paste these two commands one at a time:
+              </p>
+
+              <Screenshot alt="Screenshot: The terminal panel at the bottom of Cursor where you paste commands" />
+
+              <div className="space-y-3">
+                <div>
+                  <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
+                    Download the project
+                  </p>
+                  <CopyCommand command="git clone https://github.com/taylorroy-C137/maven-assistant-playground.git && cd maven-assistant-playground" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
+                    Install dependencies
+                  </p>
+                  <CopyCommand command="npm install" />
+                </div>
+              </div>
+            </PhaseCard>
+          </div>
+        </div>
+
+        {/* ── DIVIDER ── */}
+        <div className="flex items-center gap-4 my-10">
+          <div className="flex-1 border-t border-maven-border" />
+          <span className="text-xs text-maven-text-muted whitespace-nowrap">
+            Setup complete — everything below is your regular workflow
+          </span>
+          <div className="flex-1 border-t border-maven-border" />
+        </div>
+
+        {/* ── EVERY TIME ── */}
+        <div>
+          <div className="flex items-center gap-2 mb-5">
+            <span className="text-xs font-semibold uppercase tracking-wider text-maven-teal">
+              Every time you prototype
+            </span>
+            <span className="text-xs text-maven-text-muted">
+              — your regular workflow
+            </span>
+          </div>
+
+          <div className="space-y-6">
+            <PhaseCard number={3} title="Start the playground">
+              <p className="text-sm text-maven-text-secondary">
+                Open the terminal in Cursor and run:
+              </p>
+              <CopyCommand command="npm run dev" />
+              <p className="text-sm text-maven-text-secondary">
+                Then open{" "}
                 <a
                   href="http://localhost:3000"
                   className="font-medium"
@@ -190,58 +275,101 @@ export default function GettingStartedPage() {
                 </a>{" "}
                 in Chrome. You&apos;ll see the prototype gallery.
               </p>
+            </PhaseCard>
 
-              <div className="bg-maven-bg rounded-lg p-4 space-y-2">
-                <p className="text-sm font-medium text-maven-text">
-                  To create a prototype:
-                </p>
-                <ol className="text-sm text-maven-text-secondary space-y-1.5 list-decimal pl-4">
-                  <li>
-                    Click <strong>New</strong> in the top-right corner
-                  </li>
-                  <li>Pick your name, choose a template, and click Create</li>
-                  <li>
-                    Click <strong>Open in Cursor</strong> to jump to your files
-                  </li>
-                </ol>
-              </div>
+            <PhaseCard number={4} title="Create a prototype">
+              <p className="text-sm text-maven-text-secondary">
+                In your <strong>browser</strong> (not Cursor), click the{" "}
+                <strong>+ New</strong> button in the top-right corner of the
+                gallery:
+              </p>
 
-              <div className="bg-maven-bg rounded-lg p-4 space-y-2">
-                <p className="text-sm font-medium text-maven-text">
-                  To edit with AI:
+              <Screenshot
+                src="/guide/gallery-header.png"
+                alt="Screenshot: The gallery header in your browser showing the 'Get Started' and '+ New' buttons"
+              />
+
+              <ol className="text-sm text-maven-text-secondary space-y-1.5 list-decimal pl-4">
+                <li>Pick your name from the Designer dropdown</li>
+                <li>Choose a template (e.g. Consumer Home, Consumer Care)</li>
+                <li>Click <strong>Create</strong></li>
+              </ol>
+
+              <p className="text-sm text-maven-text-secondary">
+                You&apos;ll see a success screen. Click{" "}
+                <strong>Open in Cursor</strong> to jump straight to your
+                prototype files:
+              </p>
+
+              <Screenshot
+                src="/guide/success-modal.png"
+                alt="Screenshot: The success modal after creating a prototype, with 'Open in Cursor' button"
+              />
+            </PhaseCard>
+
+            <PhaseCard number={5} title="Edit with AI">
+              <p className="text-sm text-maven-text-secondary">
+                This is the best part. You don&apos;t need to know how to code.
+              </p>
+
+              <ol className="text-sm text-maven-text-secondary space-y-2 list-decimal pl-4">
+                <li>
+                  In <strong>Cursor</strong>, open your{" "}
+                  <code className="px-1 py-0.5 bg-maven-bg rounded border border-maven-border text-xs font-mono">
+                    page.tsx
+                  </code>{" "}
+                  file
+                </li>
+                <li>
+                  Press{" "}
+                  <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                    Cmd + I
+                  </kbd>{" "}
+                  to open the AI prompt
+                </li>
+                <li>
+                  Type what you want in plain English, for example:
+                  <ul className="mt-1.5 ml-4 space-y-1 list-disc text-maven-text-tertiary">
+                    <li>
+                      <em>
+                        &ldquo;Change the welcome name from Kate to Sarah&rdquo;
+                      </em>
+                    </li>
+                    <li>
+                      <em>
+                        &ldquo;Add a progress bar at 60% below the heading&rdquo;
+                      </em>
+                    </li>
+                    <li>
+                      <em>
+                        &ldquo;Remove the support cards at the bottom&rdquo;
+                      </em>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Save (
+                  <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                    Cmd + S
+                  </kbd>
+                  ) — the browser refreshes automatically
+                </li>
+              </ol>
+
+              <Screenshot alt="Screenshot: The Cmd+I AI prompt in Cursor where you type instructions in plain English" />
+
+              <div className="bg-maven-highlight rounded-lg p-4">
+                <p className="text-sm text-maven-text">
+                  <strong>Tip:</strong> The AI already knows the Maven design
+                  system. It will use the correct colors, fonts, and components
+                  automatically.
                 </p>
-                <ol className="text-sm text-maven-text-secondary space-y-1.5 list-decimal pl-4">
-                  <li>
-                    Open your{" "}
-                    <code className="px-1 py-0.5 bg-white rounded border border-maven-border text-xs font-mono">
-                      page.tsx
-                    </code>{" "}
-                    file in Cursor
-                  </li>
-                  <li>
-                    Press{" "}
-                    <kbd className="px-1.5 py-0.5 text-xs bg-white rounded border border-maven-border font-mono">
-                      Cmd + I
-                    </kbd>{" "}
-                    to open the AI prompt
-                  </li>
-                  <li>
-                    Type what you want:{" "}
-                    <em>&ldquo;Change the welcome name to Sarah&rdquo;</em>
-                  </li>
-                  <li>
-                    Save (
-                    <kbd className="px-1.5 py-0.5 text-xs bg-white rounded border border-maven-border font-mono">
-                      Cmd + S
-                    </kbd>
-                    ) and the browser refreshes automatically
-                  </li>
-                </ol>
               </div>
-            </div>
-          </PhaseCard>
+            </PhaseCard>
+          </div>
         </div>
 
+        {/* ── QUICK REFERENCE ── */}
         <div className="mt-10 border-t border-maven-border pt-8">
           <h2 className="text-base font-semibold text-maven-text mb-4">
             Quick reference
@@ -295,6 +423,7 @@ export default function GettingStartedPage() {
           </div>
         </div>
 
+        {/* ── TROUBLESHOOTING ── */}
         <div className="mt-10 border-t border-maven-border pt-8 pb-4">
           <h2 className="text-base font-semibold text-maven-text mb-3">
             Troubleshooting
@@ -325,13 +454,11 @@ export default function GettingStartedPage() {
             <p>
               <strong className="text-maven-text">Blank page</strong> — Make
               sure{" "}
-              <code className="font-mono text-xs">npm run dev</code> is
-              running. If it stopped, run it again.
+              <code className="font-mono text-xs">npm run dev</code> is running.
+              If it stopped, run it again.
             </p>
             <p>
-              <strong className="text-maven-text">
-                Changes not showing
-              </strong>{" "}
+              <strong className="text-maven-text">Changes not showing</strong>{" "}
               — Save the file (Cmd + S) and refresh the browser.
             </p>
           </div>

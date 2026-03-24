@@ -105,12 +105,6 @@ export function NewPrototypeModal({ onClose }: NewPrototypeModalProps) {
                 >
                   Getting Started Guide
                 </Link>
-                <a
-                  href={`cursor://file/Users/taylorroy/Documents/maven-assistant-playground/${metadataPath}`}
-                  className="text-sm text-maven-text-tertiary hover:text-maven-text-secondary transition-colors"
-                >
-                  Already set up? Open in Cursor
-                </a>
                 <button
                   onClick={onClose}
                   className="text-sm text-maven-text-muted hover:text-maven-text-secondary transition-colors"

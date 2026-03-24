@@ -105,22 +105,21 @@ export function groupByMonth(
       new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+
   for (const p of sorted) {
     const date = new Date(p.createdAt);
-    const now = new Date();
-    const diffDays = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24),
-    );
+    const isCurrentMonth =
+      date.getMonth() === currentMonth && date.getFullYear() === currentYear;
 
-    let label: string;
-    if (diffDays < 7) label = "This week";
-    else if (diffDays < 30) label = "This month";
-    else {
-      label = date.toLocaleDateString("en-US", {
-        month: "long",
-        year: "numeric",
-      });
-    }
+    const label = isCurrentMonth
+      ? "This month"
+      : date.toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric",
+        });
 
     if (!groups.has(label)) groups.set(label, []);
     groups.get(label)!.push(p);

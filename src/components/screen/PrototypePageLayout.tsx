@@ -17,6 +17,8 @@ const labelColors: Record<string, { bg: string; color: string }> = {
   Enterprise: { bg: "rgba(242, 240, 236, 0.9)", color: "#5C5954" },
 };
 
+const PHONE_HEIGHT = 876;
+
 export function PrototypePageLayout({
   title,
   description,
@@ -27,38 +29,47 @@ export function PrototypePageLayout({
 
   return (
     <div
-      className="min-h-dvh flex flex-col items-center py-8 px-6"
+      className="min-h-dvh flex items-center justify-center px-6 py-8"
       style={{
-        background: "linear-gradient(145deg, #013126 0%, #035748 40%, #00826A 100%)",
+        background:
+          "linear-gradient(145deg, #013126 0%, #035748 40%, #00826A 100%)",
       }}
     >
-      {/* Top bar: back button */}
-      <div className="w-full max-w-[500px] mb-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Playground
-        </Link>
-      </div>
-
-      {/* Prototype metadata */}
-      <div className="w-full max-w-[500px] mb-5 flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <span
-            className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide"
-            style={{ backgroundColor: lc.bg, color: lc.color }}
+      <div className="flex items-center gap-12 max-w-[900px] w-full">
+        {/* Left: metadata */}
+        <div className="flex-1 flex flex-col gap-4 min-w-0">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors w-fit"
           >
-            {label}
-          </span>
-        </div>
-        <h1 className="text-2xl font-semibold text-white">{title}</h1>
-        <p className="text-sm text-white/60 leading-relaxed">{description}</p>
-      </div>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Playground
+          </Link>
 
-      {/* Phone frame */}
-      <PhoneFrame>{children}</PhoneFrame>
+          <div className="flex flex-col gap-3 mt-2">
+            <span
+              className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide w-fit"
+              style={{ backgroundColor: lc.bg, color: lc.color }}
+            >
+              {label}
+            </span>
+            <h1 className="text-2xl font-semibold text-white">{title}</h1>
+            <p className="text-sm text-white/60 leading-relaxed">
+              {description}
+            </p>
+          </div>
+        </div>
+
+        {/* Right: phone, scaled to fit viewport */}
+        <div
+          className="flex-shrink-0 origin-center"
+          style={{
+            transform: `scale(clamp(0.55, (100dvh - 64px) / ${PHONE_HEIGHT}, 1))`,
+          }}
+        >
+          <PhoneFrame>{children}</PhoneFrame>
+        </div>
+      </div>
     </div>
   );
 }

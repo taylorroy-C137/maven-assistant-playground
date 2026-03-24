@@ -54,6 +54,12 @@ export function NewPrototypeModal({ onClose }: NewPrototypeModalProps) {
         }),
       });
 
+      if (res.status === 403) {
+        router.push(`/${designer}/${slug}`);
+        onClose();
+        return;
+      }
+
       const data = await res.json();
 
       if (!res.ok) {

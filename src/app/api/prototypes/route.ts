@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { getPageTemplate } from "@/lib/page-templates";
 
 function toSlug(name: string): string {
   return name
@@ -51,6 +52,9 @@ export async function POST(request: Request) {
     path.join(protoDir, "metadata.json"),
     JSON.stringify(metadata, null, 2) + "\n",
   );
+
+  const pageSource = getPageTemplate(template || "blank", slug, name);
+  fs.writeFileSync(path.join(protoDir, "page.tsx"), pageSource);
 
   return NextResponse.json({
     ok: true,

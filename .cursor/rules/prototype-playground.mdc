@@ -1,0 +1,101 @@
+---
+description: Rules for building prototypes in the Maven Consumer Playground
+globs: ["src/app/**/page.tsx", "src/screens/**", "src/components/freya/**"]
+---
+
+# Maven Consumer Playground — Prototype Rules
+
+## Project structure
+
+- Each designer has a directory under `src/app/{designer}/` (e.g. `src/app/taylor/`)
+- Each prototype is a subdirectory: `src/app/{designer}/{slug}/`
+- Every prototype has two files: `metadata.json` (gallery info) and `page.tsx` (the UI)
+- Pages must use `"use client"` since they contain interactive components
+
+## Consumer (Freya) prototypes
+
+### Components
+
+Always import from the barrel file:
+
+```tsx
+import { FreyaNavBar, FreyaTabBar, FreyaTaskCard, ... } from "@/components/freya";
+```
+
+Available components:
+- `FreyaNavBar` — top navigation bar with Maven logo
+- `FreyaTabBar` — horizontal tab bar (`tabs={["Home", "Rx", "Care"]} activeTab="Home"`)
+- `FreyaButton` — primary/secondary buttons (`variant="primary"` or `variant="secondary"`)
+- `FreyaBadge` — status badges (`variant="maven"`, `variant="success"`, `variant="neutral"`)
+- `FreyaTaskCard` — action cards with overline, badge, title, description, CTA buttons
+- `FreyaAppointmentCard` — provider appointment cards (providerName, specialty, dateTime)
+- `FreyaContentCard` — article/content cards (badge, subjectTag, title, timeLabel)
+- `FreyaSupportCard` — support contact cards (title, subtitle, ctaLabel, icon)
+- `FreyaAccordion` — expandable sections with icon items
+- `FreyaSectionHeader` — section titles with optional action link or search
+- `FreyaCarousel` — horizontal scrolling container with dot indicators
+- `FreyaFooter` — bottom footer with Maven branding
+
+### Screen wrapper
+
+Always wrap Consumer screens in `ScreenShell`:
+
+```tsx
+import { ScreenShell } from "@/components/screen/ScreenShell";
+
+export default function MyScreen() {
+  return (
+    <ScreenShell>
+      <FreyaNavBar />
+      <FreyaTabBar tabs={["Home", "Rx", "Care"]} activeTab="Home" />
+      <div className="px-4 flex flex-col gap-6 pb-6">
+        {/* Content here */}
+      </div>
+      <FreyaFooter />
+    </ScreenShell>
+  );
+}
+```
+
+### Design tokens (CSS variables)
+
+- Colors: `var(--color-b2c-text-primary)`, `var(--color-b2c-text-secondary)`, `var(--color-b2c-text-tertiary)`, `var(--color-b2c-text-link)`, `var(--color-b2c-surface-primary)`, `var(--color-b2c-border-primary)`, `var(--color-b2c-border-disabled)`, `var(--color-b2c-icon-primary)`, `var(--color-b2c-icon-maven)`
+- Headings: use `fontFamily: "var(--font-family-b2c-emphasis)"` (Ivar Display) for display headings
+- Body text: uses `var(--font-family-sans)` automatically via ScreenShell
+- Border radius: `var(--b2c-radius-sm)`, `var(--b2c-radius-md)`, `var(--b2c-radius-lg)`
+
+### Typography pattern for headings
+
+```tsx
+<h1 style={{
+  fontSize: 34,
+  lineHeight: 1.2,
+  fontFamily: "var(--font-family-b2c-emphasis)",
+  color: "var(--color-b2c-text-primary)",
+  fontWeight: 400,
+}}>
+  Welcome, <em style={{ fontStyle: "italic" }}>Kate</em>
+</h1>
+```
+
+### Reference screens
+
+Look at these files for high-quality examples:
+- `src/screens/home.tsx` — Home screen with task cards, carousels, support
+- `src/screens/care-glp1.tsx` — Care screen with appointments, accordion, content
+- `src/screens/rx.tsx` — Rx screen with list/detail views and local state
+
+## Maven Assistant (chat) prototypes
+
+- Use `ChatShell` from `src/components/chat/ChatShell.tsx`
+- Define conversation turns as a `Turn[]` array
+- See `src/scenarios/_template.ts` for the base structure
+- Use `maven-*` Tailwind tokens for styling
+
+## When asked to create a new prototype
+
+1. If `metadata.json` already exists, create/edit `page.tsx` in the same directory.
+2. Choose Consumer (ScreenShell + Freya) or Maven Assistant (ChatShell) based on the request.
+3. Use real, specific content — not placeholder lorem ipsum.
+4. Use existing Freya components before building custom UI.
+5. Test at `http://localhost:3000/{designer}/{slug}`.

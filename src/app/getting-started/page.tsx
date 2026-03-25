@@ -252,13 +252,14 @@ export default function GettingStartedPage() {
                 >
                   localhost:3000
                 </a>{" "}
-                is ready. Open that link in Chrome to see the prototype gallery.
+                is ready. Open that link in your browser (Chrome or Cursor&apos;s
+                built-in browser both work) to see the prototype gallery.
               </p>
             </PhaseCard>
 
             <PhaseCard number={4} title="Create a prototype">
               <p className="text-sm text-maven-text-secondary">
-                In your <strong>browser</strong> (not Cursor), click the{" "}
+                In your browser, click the{" "}
                 <strong>+ New</strong> button in the top-right corner of the
                 gallery:
               </p>

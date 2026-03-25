@@ -32,6 +32,37 @@ function CopyCommand({ command }: { command: string }) {
   );
 }
 
+function AgentPrompt({ prompt }: { prompt: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(prompt);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div
+      className="flex items-start gap-3 rounded-lg px-4 py-3 text-sm cursor-pointer hover:opacity-90 transition-opacity"
+      style={{ backgroundColor: "var(--color-maven-highlight)" }}
+      onClick={handleCopy}
+    >
+      <span className="text-maven-text-secondary mt-0.5 select-none">&ldquo;</span>
+      <p className="flex-1 text-maven-text italic select-all">{prompt}</p>
+      <button
+        className="flex-shrink-0 p-1 rounded"
+        aria-label="Copy prompt"
+      >
+        {copied ? (
+          <Check className="w-3.5 h-3.5 text-maven-teal" />
+        ) : (
+          <Copy className="w-3.5 h-3.5 text-maven-text-muted" />
+        )}
+      </button>
+    </div>
+  );
+}
+
 function PhaseCard({
   number,
   title,
@@ -80,7 +111,7 @@ export default function GettingStartedPage() {
           <p className="text-base text-maven-text-secondary leading-relaxed">
             The Maven Prototype Playground lets you create and share interactive
             prototypes using AI. No coding experience needed — you describe what
-            you want in plain English, and Cursor builds it for you.
+            you want in plain English, and Cursor&apos;s AI agent builds it for you.
           </p>
         </div>
 
@@ -99,7 +130,7 @@ export default function GettingStartedPage() {
             <PhaseCard number={1} title="Get the tools">
               <p className="text-sm text-maven-text-secondary">
                 You need two free apps on your Mac. If you already have them,
-                skip to Phase 2.
+                skip to Step 2.
               </p>
 
               <div className="space-y-3">
@@ -114,8 +145,8 @@ export default function GettingStartedPage() {
                       Download Cursor
                     </p>
                     <p className="text-sm text-maven-text-secondary mt-0.5">
-                      A code editor with built-in AI. Download it, then drag it
-                      into your Applications folder.
+                      A code editor with a built-in AI agent. Download it, then
+                      drag it into your Applications folder.
                     </p>
                     <a
                       href="https://www.cursor.com/"
@@ -161,28 +192,21 @@ export default function GettingStartedPage() {
 
             <PhaseCard number={2} title="Get the project">
               <p className="text-sm text-maven-text-secondary">
-                Open Cursor, then open the built-in terminal:{" "}
-                <strong>View &rarr; Terminal</strong> (or press{" "}
+                Open Cursor, then open the <strong>Agent</strong> panel by
+                pressing{" "}
                 <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
-                  Ctrl + `
+                  Cmd + L
                 </kbd>
-                ). Paste these two commands one at a time:
+                . Copy and paste this prompt:
               </p>
 
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
-                    Download the project
-                  </p>
-                  <CopyCommand command="git clone https://github.com/taylorroy-C137/maven-assistant-playground.git && cd maven-assistant-playground" />
-                </div>
-                <div>
-                  <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
-                    Install dependencies
-                  </p>
-                  <CopyCommand command="npm install" />
-                </div>
-              </div>
+              <AgentPrompt prompt="Clone https://github.com/taylorroy-C137/maven-assistant-playground.git and install the dependencies" />
+
+              <p className="text-sm text-maven-text-secondary">
+                The agent will run the commands for you. If anything goes wrong
+                (permissions, missing tools), it will diagnose the issue and walk
+                you through fixing it.
+              </p>
             </PhaseCard>
           </div>
         </div>
@@ -210,11 +234,17 @@ export default function GettingStartedPage() {
           <div className="space-y-6">
             <PhaseCard number={3} title="Start the playground">
               <p className="text-sm text-maven-text-secondary">
-                Open the terminal in Cursor and run:
+                Open the Agent panel (
+                <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                  Cmd + L
+                </kbd>
+                ) and ask:
               </p>
-              <CopyCommand command="npm run dev" />
+              <AgentPrompt prompt="Start the dev server" />
               <p className="text-sm text-maven-text-secondary">
-                Then open{" "}
+                The agent will run{" "}
+                <code className="font-mono text-xs">npm run dev</code> and tell
+                you when{" "}
                 <a
                   href="http://localhost:3000"
                   className="font-medium"
@@ -222,7 +252,7 @@ export default function GettingStartedPage() {
                 >
                   localhost:3000
                 </a>{" "}
-                in Chrome. You&apos;ll see the prototype gallery.
+                is ready. Open that link in Chrome to see the prototype gallery.
               </p>
             </PhaseCard>
 
@@ -242,65 +272,61 @@ export default function GettingStartedPage() {
               <p className="text-sm text-maven-text-secondary">
                 You&apos;ll see a success screen. Click{" "}
                 <strong>Open in Cursor</strong> to jump straight to your
-                prototype files:
+                prototype files.
               </p>
-
             </PhaseCard>
 
             <PhaseCard number={5} title="Edit with AI">
               <p className="text-sm text-maven-text-secondary">
                 This is the best part. You don&apos;t need to know how to code.
+                Use the Agent panel for everything.
               </p>
 
-              <ol className="text-sm text-maven-text-secondary space-y-2 list-decimal pl-4">
-                <li>
-                  In <strong>Cursor</strong>, open your{" "}
-                  <code className="px-1 py-0.5 bg-maven-bg rounded border border-maven-border text-xs font-mono">
-                    page.tsx
-                  </code>{" "}
-                  file
-                </li>
-                <li>
-                  Press{" "}
-                  <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
-                    Cmd + I
-                  </kbd>{" "}
-                  to open the AI prompt
-                </li>
-                <li>
-                  Type what you want in plain English, for example:
-                  <ul className="mt-1.5 ml-4 space-y-1 list-disc text-maven-text-tertiary">
-                    <li>
-                      <em>
-                        &ldquo;Change the welcome name from Kate to Sarah&rdquo;
-                      </em>
-                    </li>
-                    <li>
-                      <em>
-                        &ldquo;Add a progress bar at 60% below the heading&rdquo;
-                      </em>
-                    </li>
-                    <li>
-                      <em>
-                        &ldquo;Remove the support cards at the bottom&rdquo;
-                      </em>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  Save (
-                  <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
-                    Cmd + S
-                  </kbd>
-                  ) — the browser refreshes automatically
-                </li>
-              </ol>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
+                    Quick edits
+                  </p>
+                  <p className="text-sm text-maven-text-secondary mb-2">
+                    Press{" "}
+                    <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                      Cmd + I
+                    </kbd>{" "}
+                    on any file to make inline changes. Describe what you want:
+                  </p>
+                  <div className="space-y-2">
+                    <AgentPrompt prompt="Change the welcome name from Kate to Sarah" />
+                    <AgentPrompt prompt="Remove the support cards at the bottom" />
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-medium text-maven-text-tertiary uppercase tracking-wider mb-1.5">
+                    Bigger changes
+                  </p>
+                  <p className="text-sm text-maven-text-secondary mb-2">
+                    Open the Agent panel (
+                    <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                      Cmd + L
+                    </kbd>
+                    ) for multi-step or multi-file changes:
+                  </p>
+                  <div className="space-y-2">
+                    <AgentPrompt prompt="Add a progress bar at 60% below the heading and a congratulations message when it reaches 100%" />
+                    <AgentPrompt prompt="Create a new chat scenario where a member asks about postpartum anxiety" />
+                  </div>
+                </div>
+              </div>
 
               <div className="bg-maven-highlight rounded-lg p-4">
                 <p className="text-sm text-maven-text">
                   <strong>Tip:</strong> The AI already knows the Maven design
                   system. It will use the correct colors, fonts, and components
-                  automatically.
+                  automatically. Save (
+                  <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+                    Cmd + S
+                  </kbd>
+                  ) and the browser refreshes automatically.
                 </p>
               </div>
             </PhaseCard>
@@ -314,19 +340,15 @@ export default function GettingStartedPage() {
           </h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="bg-maven-bg rounded-lg p-4">
-              <p className="font-medium text-maven-text mb-2">Commands</p>
+              <p className="font-medium text-maven-text mb-2">Shortcuts</p>
               <div className="space-y-1.5 text-maven-text-secondary">
                 <p>
-                  <code className="font-mono text-xs">npm run dev</code> — start
-                  the playground
+                  <kbd className="font-mono text-xs">Cmd + L</kbd> — open Agent
+                  panel
                 </p>
                 <p>
-                  <kbd className="font-mono text-xs">Ctrl + C</kbd> — stop the
-                  server
-                </p>
-                <p>
-                  <kbd className="font-mono text-xs">Cmd + I</kbd> — open AI
-                  prompt
+                  <kbd className="font-mono text-xs">Cmd + I</kbd> — inline AI
+                  edit
                 </p>
                 <p>
                   <kbd className="font-mono text-xs">Cmd + S</kbd> — save file
@@ -366,34 +388,23 @@ export default function GettingStartedPage() {
           <h2 className="text-base font-semibold text-maven-text mb-3">
             Troubleshooting
           </h2>
+          <p className="text-sm text-maven-text-secondary mb-4">
+            If something goes wrong, describe the problem to the Agent (
+            <kbd className="px-1.5 py-0.5 text-xs bg-maven-bg rounded border border-maven-border font-mono">
+              Cmd + L
+            </kbd>
+            ). It can diagnose and fix most issues automatically. Common ones:
+          </p>
           <div className="space-y-3 text-sm text-maven-text-secondary">
             <p>
               <strong className="text-maven-text">
-                &ldquo;command not found: npm&rdquo;
+                &ldquo;command not found&rdquo; errors
               </strong>{" "}
-              — Node.js isn&apos;t installed. Download it from{" "}
-              <a
-                href="https://nodejs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--color-maven-teal)" }}
-              >
-                nodejs.org
-              </a>
-              .
+              — Tell the agent. It will identify what&apos;s missing (Node.js, Git, Xcode tools) and walk you through installing it.
             </p>
             <p>
-              <strong className="text-maven-text">
-                &ldquo;command not found: git&rdquo;
-              </strong>{" "}
-              — Open Cursor and it will prompt you to install developer tools.
-              Click Install, then try again.
-            </p>
-            <p>
-              <strong className="text-maven-text">Blank page</strong> — Make
-              sure{" "}
-              <code className="font-mono text-xs">npm run dev</code> is running.
-              If it stopped, run it again.
+              <strong className="text-maven-text">Blank page</strong> — Ask the
+              agent to restart the dev server.
             </p>
             <p>
               <strong className="text-maven-text">Changes not showing</strong>{" "}

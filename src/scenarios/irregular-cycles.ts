@@ -36,6 +36,12 @@ export const irregularCycles: Scenario = {
         role: "agent",
         text: "Okay, let's get started. Tell me more about the cramping \u2014 Is the pain constant or does it come and go? Have you noticed any unusual bleeding or discharge?",
         generatingDelayMs: 1800,
+        chips: [
+          "It comes and goes",
+          "It's constant",
+          "No unusual bleeding",
+          "Yes, I've noticed changes",
+        ],
       },
     ],
     "Long reply": [
@@ -48,6 +54,12 @@ export const irregularCycles: Scenario = {
         role: "agent",
         text: "**Super long message example**\n\nOkay, let's get started. Tell me more about the cramping \u2014 Is the pain constant or does it come and go? Have you noticed any unusual bleeding or discharge?\n\nOkay, let's get started. Tell me more about the cramping \u2014 Is the pain constant or does it come and go? Have you noticed any unusual bleeding or discharge?\n\nOkay, let's get started. Tell me more about the cramping \u2014 Is the pain constant or does it come and go? Have you noticed any unusual bleeding or discharge?",
         generatingDelayMs: 2200,
+        chips: [
+          "It comes and goes",
+          "It's constant",
+          "No unusual bleeding",
+          "Yes, I've noticed changes",
+        ],
       },
     ],
   },

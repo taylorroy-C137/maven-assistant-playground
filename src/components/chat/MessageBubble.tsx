@@ -23,7 +23,7 @@ function ThinkingText() {
       className="text-[16px] font-medium select-none"
       style={{
         background:
-          "linear-gradient(90deg, #00856f 0%, #00856f 40%, transparent 80%)",
+          "linear-gradient(90deg, #191817 0%, #191817 40%, transparent 80%)",
         backgroundSize: "200% 100%",
         backgroundClip: "text",
         WebkitBackgroundClip: "text",
@@ -95,7 +95,7 @@ export function MessageBubble({
       <div
         className={`rounded-2xl px-4 py-3 max-w-[85%] ${
           isUser
-            ? "bg-[#F5F0EB] text-maven-text"
+            ? "bg-white text-maven-text"
             : isMedicalTeam
               ? "ml-8"
               : ""

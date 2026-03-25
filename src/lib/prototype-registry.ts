@@ -9,6 +9,7 @@ import { handoffToSupport } from "@/scenarios/handoff-to-support";
 import { template } from "@/scenarios/_template";
 import { healthScenarios } from "@/scenarios/health-scenarios";
 import { programScenarios } from "@/scenarios/program-scenarios";
+import { irregularCycles } from "@/scenarios/irregular-cycles";
 
 import HomeScreen from "@/screens/home";
 import CareGlp1Screen from "@/screens/care-glp1";
@@ -39,6 +40,7 @@ const allScenarios: Scenario[] = [
   template,
   ...healthScenarios,
   ...programScenarios,
+  irregularCycles,
 ];
 
 const chatPrototypes: ChatPrototype[] = allScenarios.map((s) =>

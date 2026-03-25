@@ -3,14 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import type { Turn } from "@/lib/scenario-types";
 import { GradientBackground } from "./GradientBackground";
-import { GlassLayer } from "./GlassLayer";
 import { MessageBubble } from "./MessageBubble";
 import { PromptHScroll } from "./PromptHScroll";
 import { SmartCard } from "./SmartCard";
 import { EscalationCard } from "./EscalationCard";
 import { Composer } from "./Composer";
-import { MavenOrb } from "./MavenOrb";
-import { ArrowLeft, MoreHorizontal } from "lucide-react";
+import { ArrowLeft, SquarePen } from "lucide-react";
 import Link from "next/link";
 
 interface ChatShellProps {
@@ -80,24 +78,20 @@ export function ChatShell({
     <div className="relative w-full h-full flex flex-col bg-maven-bg overflow-hidden">
       <GradientBackground />
 
-      <GlassLayer className="relative z-10 flex items-center gap-3 px-4 py-3 rounded-b-2xl border-b border-white/20">
+      <div className="relative z-10 flex items-center px-4 py-3">
         <Link
           href="/"
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/30 transition-colors"
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors"
         >
           <ArrowLeft className="w-5 h-5 text-maven-text" />
         </Link>
-        <MavenOrb size={28} />
-        <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-semibold text-maven-text truncate">
-            {title}
-          </h1>
-          <p className="text-xs text-maven-text-secondary">Maven Assistant</p>
-        </div>
-        <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/30 transition-colors">
-          <MoreHorizontal className="w-5 h-5 text-maven-text" />
+        <h1 className="flex-1 text-center text-sm font-semibold text-maven-text truncate">
+          {title}
+        </h1>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors">
+          <SquarePen className="w-5 h-5 text-maven-text" />
         </button>
-      </GlassLayer>
+      </div>
 
       {variantKeys.length > 0 && (
         <div className="relative z-10 flex gap-1 px-4 py-2 overflow-x-auto scrollbar-hide">

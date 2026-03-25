@@ -231,6 +231,11 @@
   --spacing-chat: 16px;
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 body {
   font-family: var(--font-family-sans);
   background: var(--color-maven-bg);

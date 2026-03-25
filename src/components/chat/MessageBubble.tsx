@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { MessageRole, Attachment } from "@/lib/scenario-types";
-import { MavenOrb } from "./MavenOrb";
 import { ThumbsUp, ThumbsDown, RotateCcw, Paperclip } from "lucide-react";
 
 interface MessageBubbleProps {
@@ -18,35 +17,41 @@ interface MessageBubbleProps {
   onRetry?: () => void;
 }
 
-function TypingDots() {
+function ThinkingText() {
   return (
-    <div className="flex items-center gap-1 py-1">
-      {[0, 1, 2].map((i) => (
-        <span
-          key={i}
-          className="w-1.5 h-1.5 rounded-full bg-maven-text-muted animate-bounce"
-          style={{ animationDelay: `${i * 150}ms` }}
-        />
-      ))}
-    </div>
+    <span
+      className="text-[16px] font-medium select-none"
+      style={{
+        background:
+          "linear-gradient(90deg, #00856f 0%, #00856f 40%, transparent 80%)",
+        backgroundSize: "200% 100%",
+        backgroundClip: "text",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        animation: "shimmer 2.4s ease-in-out infinite",
+      }}
+    >
+      Thinking...
+    </span>
   );
 }
 
-function Avatar({ role, author }: { role: MessageRole; author?: string }) {
-  if (role === "agent") return <MavenOrb size={24} />;
-
+function MedicalTeamAvatar({ author }: { author?: string }) {
   const initials =
-    role === "medical-team"
+    author === "medical-team"
       ? "MT"
-      : (author?.[0] ?? "U").toUpperCase();
-  const bg =
-    role === "medical-team" ? "bg-maven-teal" : "bg-maven-text-secondary";
+      : (author?.[0] ?? "MT").toUpperCase();
 
   return (
-    <div
-      className={`w-6 h-6 rounded-full ${bg} flex items-center justify-center flex-shrink-0`}
-    >
-      <span className="text-white text-[10px] font-medium">{initials}</span>
+    <div className="flex items-center gap-2">
+      <div className="w-6 h-6 rounded-full bg-maven-teal flex items-center justify-center flex-shrink-0">
+        <span className="text-white text-[10px] font-medium">{initials}</span>
+      </div>
+      {author && (
+        <span className="text-xs font-medium text-maven-text-secondary">
+          {author}
+        </span>
+      )}
     </div>
   );
 }
@@ -65,22 +70,24 @@ export function MessageBubble({
 }: MessageBubbleProps) {
   const [feedback, setFeedback] = useState<"up" | "down" | null>(null);
   const isUser = role === "user";
+  const isMedicalTeam = role === "medical-team";
 
   return (
     <div className={`flex flex-col gap-1 ${isUser ? "items-end" : "items-start"}`}>
-      {!isUser && (
-        <div className="flex items-center gap-2">
-          <Avatar role={role} author={author} />
-          {author && (
-            <span className="text-xs font-medium text-maven-text-secondary">
-              {author}
-            </span>
-          )}
-        </div>
+      {/* Timestamp above user messages, right-aligned */}
+      {isUser && timestamp && (
+        <span className="text-[12px] leading-5 text-maven-text-tertiary">
+          {timestamp}
+        </span>
       )}
 
+      {/* Medical-team avatar + author (preserved) */}
+      {isMedicalTeam && <MedicalTeamAvatar author={author} />}
+
       {eyebrow && !isUser && (
-        <span className="text-[11px] font-medium text-maven-teal uppercase tracking-wide ml-8">
+        <span
+          className={`text-[11px] font-medium text-maven-teal uppercase tracking-wide ${isMedicalTeam ? "ml-8" : ""}`}
+        >
           {eyebrow}
         </span>
       )}
@@ -88,19 +95,21 @@ export function MessageBubble({
       <div
         className={`rounded-2xl px-4 py-3 max-w-[85%] ${
           isUser
-            ? "bg-maven-teal text-white rounded-br-md"
-            : "ml-8"
+            ? "bg-[#F5F0EB] text-maven-text"
+            : isMedicalTeam
+              ? "ml-8"
+              : ""
         } ${sendFailure ? "opacity-60" : ""}`}
       >
         {generating ? (
-          <TypingDots />
+          <ThinkingText />
         ) : (
           <p className="text-[16px] leading-6 whitespace-pre-wrap">{text}</p>
         )}
       </div>
 
       {attachments && attachments.length > 0 && (
-        <div className={`flex flex-wrap gap-2 ${isUser ? "justify-end" : "ml-8"}`}>
+        <div className={`flex flex-wrap gap-2 ${isUser ? "justify-end" : isMedicalTeam ? "ml-8" : ""}`}>
           {attachments.map((att, i) => (
             <div
               key={i}
@@ -118,15 +127,10 @@ export function MessageBubble({
         </div>
       )}
 
+      {/* Footer: feedback for non-user, retry for failures */}
       <div
-        className={`flex items-center gap-3 ${isUser ? "justify-end" : "ml-8"}`}
+        className={`flex items-center gap-3 ${isUser ? "justify-end" : isMedicalTeam ? "ml-8" : ""}`}
       >
-        {timestamp && (
-          <span className="text-[14px] leading-5 text-maven-text-tertiary">
-            {timestamp}
-          </span>
-        )}
-
         {sendFailure && (
           <button
             onClick={onRetry}

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import type { Turn } from "@/lib/scenario-types";
 import { GradientBackground } from "./GradientBackground";
 import { MessageBubble } from "./MessageBubble";
-import { PromptHScroll } from "./PromptHScroll";
 import { SmartCard } from "./SmartCard";
 import { EscalationCard } from "./EscalationCard";
 import { Composer } from "./Composer";
@@ -68,9 +67,6 @@ export function ChatShell({
 
     return () => clearTimeout(timer);
   }, [currentIndex, activeTurns]);
-
-  const lastTurn = visibleTurns[visibleTurns.length - 1];
-  const showChips = lastTurn?.chips && lastTurn.chips.length > 0 && !lastTurn.generating;
 
   const variantKeys = variants ? Object.keys(variants) : [];
 
@@ -155,7 +151,6 @@ export function ChatShell({
       </div>
 
       <div className="relative z-10">
-        {showChips && <PromptHScroll chips={lastTurn.chips!} />}
         <Composer disabled={currentIndex < activeTurns.length} />
       </div>
     </div>
